@@ -10019,7 +10019,8 @@
 		"flint": {
 			"name": "evolvingVariableTypes",
 			"plugin": "ts",
-			"status": "skipped"
+			"status": "implemented",
+			"strictness": "strict"
 		}
 	},
 	{
