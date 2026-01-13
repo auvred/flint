@@ -14,6 +14,7 @@ import arrayEmptyCallbackSlots from "./rules/arrayEmptyCallbackSlots.ts";
 import arrayExistenceChecksConsistency from "./rules/arrayExistenceChecksConsistency.ts";
 import arrayFilteredFinds from "./rules/arrayFilteredFinds.ts";
 import arrayFinds from "./rules/arrayFinds.ts";
+import arrayFlatMapMethods from "./rules/arrayFlatMapMethods.ts";
 import arrayMapIdentities from "./rules/arrayMapIdentities.ts";
 import arrayMutableReverses from "./rules/arrayMutableReverses.ts";
 import arrayMutableSorts from "./rules/arrayMutableSorts.ts";
@@ -120,6 +121,7 @@ export const ts = createPlugin({
 		arrayExistenceChecksConsistency,
 		arrayFilteredFinds,
 		arrayFinds,
+		arrayFlatMapMethods,
 		arrayMapIdentities,
 		arrayMutableReverses,
 		arrayMutableSorts,
