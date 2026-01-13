@@ -3,9 +3,12 @@ import {
 	type AnyLanguageFileFactory,
 	type AnyOptionalSchema,
 	type AnyRule,
+	createVFSLinterHost,
 	type InferredInputObject,
+	type LinterHost,
 	parseOptions,
 	type RuleAbout,
+	type VFSLinterHost,
 } from "@flint.fyi/core";
 import { CachedFactory } from "cached-factory";
 import assert from "node:assert/strict";
@@ -21,6 +24,7 @@ export interface RuleTesterOptions {
 		fileName?: string;
 	};
 	describe?: TesterSetupDescribe;
+	host?: LinterHost | undefined;
 	it?: TesterSetupIt;
 	only?: TesterSetupIt;
 	scope?: Record<string, unknown>;
@@ -44,18 +48,23 @@ export type TesterSetupIt = (
 
 export class RuleTester {
 	#fileFactories: CachedFactory<AnyLanguage, AnyLanguageFileFactory>;
-	#testerOptions: Required<RuleTesterOptions>;
+	#linterHost: VFSLinterHost;
+	#testerOptions: Required<Omit<RuleTesterOptions, "host">>;
 
 	constructor({
 		defaults,
 		describe,
+		host,
 		it,
 		only,
 		scope = globalThis,
 		skip,
 	}: RuleTesterOptions = {}) {
+		this.#linterHost = createVFSLinterHost(
+			host == null ? { cwd: process.cwd() } : { baseHost: host },
+		);
 		this.#fileFactories = new CachedFactory((language: AnyLanguage) =>
-			language.createFileFactory(),
+			language.createFileFactory(this.#linterHost),
 		);
 
 		it = defaultTo(it, scope, "it");
@@ -114,6 +123,7 @@ export class RuleTester {
 		this.#itTestCase(testCaseNormalized, async () => {
 			const reports = await runTestCaseRule(
 				this.#fileFactories,
+				this.#linterHost,
 				{ options: parseOptions(rule.options, testCase.options), rule },
 				testCaseNormalized,
 			);
@@ -159,6 +169,7 @@ export class RuleTester {
 		this.#itTestCase(testCaseNormalized, async () => {
 			const reports = await runTestCaseRule(
 				this.#fileFactories,
+				this.#linterHost,
 				{ options: parseOptions(rule.options, testCase.options), rule },
 				testCaseNormalized,
 			);
