@@ -70,7 +70,7 @@ export default typescriptLanguage.createRule({
 		description:
 			"Reports using `.filter()` when only the first or last matching element is needed.",
 		id: "arrayFilteredFinds",
-		preset: "logical",
+		presets: ["logical"],
 	},
 	messages: {
 		preferFind: {
