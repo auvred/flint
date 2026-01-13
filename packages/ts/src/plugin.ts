@@ -10,6 +10,7 @@ import arrayCallbackReturns from "./rules/arrayCallbackReturns.ts";
 import arrayConstructors from "./rules/arrayConstructors.ts";
 import arrayDeleteUnnecessaryCounts from "./rules/arrayDeleteUnnecessaryCounts.ts";
 import arrayElementDeletions from "./rules/arrayElementDeletions.ts";
+import arrayEmptyCallbackSlots from "./rules/arrayEmptyCallbackSlots.ts";
 import arrayExistenceChecksConsistency from "./rules/arrayExistenceChecksConsistency.ts";
 import arrayFinds from "./rules/arrayFinds.ts";
 import arrayMapIdentities from "./rules/arrayMapIdentities.ts";
@@ -113,6 +114,7 @@ export const ts = createPlugin({
 		arrayConstructors,
 		arrayDeleteUnnecessaryCounts,
 		arrayElementDeletions,
+		arrayEmptyCallbackSlots,
 		arrayExistenceChecksConsistency,
 		arrayFinds,
 		arrayMapIdentities,
