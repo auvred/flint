@@ -12,9 +12,8 @@ function notImplemented(methodName: string): never {
 
 // https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/deps/uv/include/uv.h#L1260-L1269
 const UV_DIRENT_TYPE = {
-	UV_DIRENT_DIR: 1,
+	UV_DIRENT_DIR: 2,
 	UV_DIRENT_FILE: 1,
-	UV_DIRENT_UNKNOWN: 0,
 };
 
 // https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/lib/internal/fs/utils.js#L160
