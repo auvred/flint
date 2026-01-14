@@ -6,6 +6,7 @@ import emptyDocuments from "./rules/emptyDocuments.ts";
 import emptyMappingKeys from "./rules/emptyMappingKeys.ts";
 import emptyMappingValues from "./rules/emptyMappingValues.ts";
 import numericTrailingZeros from "./rules/numericTrailingZeros.ts";
+import plainScalars from "./rules/plainScalars.ts";
 
 export const yaml = createPlugin({
 	files: {
@@ -19,5 +20,6 @@ export const yaml = createPlugin({
 		emptyMappingKeys,
 		emptyMappingValues,
 		numericTrailingZeros,
+		plainScalars,
 	],
 });
