@@ -13,6 +13,7 @@ export type { TypeScriptNodesByName } from "./nodes.ts";
 export { ts } from "./plugin.ts";
 export type * as AST from "./types/ast.ts";
 export type { Checker } from "./types/checker.ts";
+export { createRuleTesterTSConfig } from "./utils/createRuleTesterTSConfig.ts";
 export { getDeclarationsIfGlobal } from "./utils/getDeclarationsIfGlobal.ts";
 export { isGlobalDeclaration } from "./utils/isGlobalDeclaration.ts";
 export { isGlobalDeclarationOfName } from "./utils/isGlobalDeclarationOfName.ts";

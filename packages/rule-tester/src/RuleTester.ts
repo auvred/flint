@@ -3,15 +3,17 @@ import {
 	type AnyLanguageFileFactory,
 	type AnyOptionalSchema,
 	type AnyRule,
+	createDiskBackedLinterHost,
+	createEphemeralLinterHost,
 	createVFSLinterHost,
 	type InferredInputObject,
-	type LinterHost,
 	parseOptions,
 	type RuleAbout,
 	type VFSLinterHost,
 } from "@flint.fyi/core";
 import { CachedFactory } from "cached-factory";
 import assert from "node:assert/strict";
+import path from "node:path";
 
 import { createReportSnapshot } from "./createReportSnapshot.ts";
 import { normalizeTestCase } from "./normalizeTestCase.ts";
@@ -20,11 +22,12 @@ import { runTestCaseRule } from "./runTestCaseRule.ts";
 import type { InvalidTestCase, TestCase, ValidTestCase } from "./types.ts";
 
 export interface RuleTesterOptions {
+	defaultFiles?: Record<string, string>;
 	defaults?: {
 		fileName?: string;
 	};
 	describe?: TesterSetupDescribe;
-	host?: LinterHost | undefined;
+	diskBackedFSRoot?: string;
 	it?: TesterSetupIt;
 	only?: TesterSetupIt;
 	scope?: Record<string, unknown>;
@@ -49,19 +52,46 @@ export type TesterSetupIt = (
 export class RuleTester {
 	#fileFactories: CachedFactory<AnyLanguage, AnyLanguageFileFactory>;
 	#linterHost: VFSLinterHost;
-	#testerOptions: Required<Omit<RuleTesterOptions, "host">>;
+	#testerOptions: Required<
+		Omit<RuleTesterOptions, "diskBackedFSRoot" | "defaultFiles">
+	>;
 
 	constructor({
+		defaultFiles,
 		defaults,
 		describe,
-		host,
+		diskBackedFSRoot,
 		it,
 		only,
 		scope = globalThis,
 		skip,
 	}: RuleTesterOptions = {}) {
+		let baseHost =
+			diskBackedFSRoot != null
+				? createEphemeralLinterHost(
+						createDiskBackedLinterHost(
+							path.resolve(
+								process.cwd(),
+								diskBackedFSRoot,
+								"_flint-rule-tester-virtual",
+							),
+						),
+					)
+				: undefined;
+		if (defaultFiles != null && Object.keys(defaultFiles).length > 0) {
+			const vfs = createVFSLinterHost(
+				baseHost == null ? { cwd: process.cwd() } : { baseHost },
+			);
+			for (const [name, content] of Object.entries(defaultFiles)) {
+				const filePath = path.resolve(vfs.getCurrentDirectory(), name);
+				vfs.vfsUpsertFile(filePath, content);
+			}
+			baseHost = vfs;
+		}
+		// another overlay to prevent `defaultFiles` from being overwritten
+		// by per-test-case `files`
 		this.#linterHost = createVFSLinterHost(
-			host == null ? { cwd: process.cwd() } : { baseHost: host },
+			baseHost == null ? { cwd: process.cwd() } : { baseHost },
 		);
 		this.#fileFactories = new CachedFactory((language: AnyLanguage) =>
 			language.createFileFactory(this.#linterHost),

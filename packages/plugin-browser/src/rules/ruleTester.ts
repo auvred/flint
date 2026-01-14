@@ -1,13 +1,13 @@
-import { createRuleTesterTSHost, RuleTester } from "@flint.fyi/rule-tester";
+import { RuleTester } from "@flint.fyi/rule-tester";
+import { createRuleTesterTSConfig } from "@flint.fyi/ts";
 import { describe, it } from "vitest";
 
 export const ruleTester = new RuleTester({
+	defaultFiles: createRuleTesterTSConfig({
+		lib: ["esnext", "DOM"],
+	}),
 	defaults: { fileName: "file.ts" },
 	describe,
-	host: createRuleTesterTSHost(import.meta.dirname, {
-		defaultCompilerOptions: {
-			lib: ["esnext", "DOM"],
-		},
-	}),
+	diskBackedFSRoot: import.meta.dirname,
 	it,
 });
