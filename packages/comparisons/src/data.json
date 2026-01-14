@@ -9565,7 +9565,8 @@
 		"flint": {
 			"name": "emptyEnums",
 			"plugin": "ts",
-			"preset": "logical"
+			"preset": "logical",
+			"status": "implemented"
 		}
 	},
 	{
