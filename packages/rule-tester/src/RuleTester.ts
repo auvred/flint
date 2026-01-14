@@ -53,7 +53,7 @@ export class RuleTester {
 	#fileFactories: CachedFactory<AnyLanguage, AnyLanguageFileFactory>;
 	#linterHost: VFSLinterHost;
 	#testerOptions: Required<
-		Omit<RuleTesterOptions, "diskBackedFSRoot" | "defaultFiles">
+		Omit<RuleTesterOptions, "defaultFiles" | "diskBackedFSRoot">
 	>;
 
 	constructor({
