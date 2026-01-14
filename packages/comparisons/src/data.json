@@ -3478,7 +3478,8 @@
 		"flint": {
 			"name": "linkFragments",
 			"plugin": "md",
-			"preset": "logical"
+			"preset": "logical",
+			"status": "implemented"
 		},
 		"markdownlint": [
 			{
