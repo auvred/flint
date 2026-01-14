@@ -1,5 +1,6 @@
 import { createPlugin } from "@flint.fyi/core";
 
+import accessorThisRecursion from "./rules/accessorThisRecursion.ts";
 import anyArguments from "./rules/anyArguments.ts";
 import anyAssignments from "./rules/anyAssignments.ts";
 import anyCalls from "./rules/anyCalls.ts";
@@ -122,6 +123,7 @@ export const ts = createPlugin({
 	},
 	name: "TypeScript",
 	rules: [
+		accessorThisRecursion,
 		anyArguments,
 		anyAssignments,
 		anyCalls,
