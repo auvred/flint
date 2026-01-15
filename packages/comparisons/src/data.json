@@ -10241,7 +10241,8 @@
 		"flint": {
 			"name": "exportUniqueNames",
 			"plugin": "ts",
-			"status": "skipped"
+			"preset": "untyped",
+			"status": "implemented"
 		},
 		"oxlint": [
 			{
