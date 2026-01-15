@@ -73,6 +73,7 @@ import emptyFiles from "./rules/emptyFiles.ts";
 import emptyFunctions from "./rules/emptyFunctions.ts";
 import emptyModuleAttributes from "./rules/emptyModuleAttributes.ts";
 import emptyStaticBlocks from "./rules/emptyStaticBlocks.ts";
+import emptyTypeParameterLists from "./rules/emptyTypeParameterLists.ts";
 import enumInitializers from "./rules/enumInitializers.ts";
 import enumMemberLiterals from "./rules/enumMemberLiterals.ts";
 import enumValueConsistency from "./rules/enumValueConsistency.ts";
@@ -212,6 +213,7 @@ export const ts = createPlugin({
 		emptyFunctions,
 		emptyModuleAttributes,
 		emptyStaticBlocks,
+		emptyTypeParameterLists,
 		enumInitializers,
 		enumMemberLiterals,
 		enumValueConsistency,
