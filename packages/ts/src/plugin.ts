@@ -77,6 +77,7 @@ import emptyTypeParameterLists from "./rules/emptyTypeParameterLists.ts";
 import enumInitializers from "./rules/enumInitializers.ts";
 import enumMemberLiterals from "./rules/enumMemberLiterals.ts";
 import enumValueConsistency from "./rules/enumValueConsistency.ts";
+import enumValueDuplicates from "./rules/enumValueDuplicates.ts";
 import equalityOperatorNegations from "./rules/equalityOperatorNegations.ts";
 import evolvingVariableTypes from "./rules/evolvingVariableTypes.ts";
 import exceptionAssignments from "./rules/exceptionAssignments.ts";
@@ -217,6 +218,7 @@ export const ts = createPlugin({
 		enumInitializers,
 		enumMemberLiterals,
 		enumValueConsistency,
+		enumValueDuplicates,
 		equalityOperatorNegations,
 		evolvingVariableTypes,
 		exceptionAssignments,
