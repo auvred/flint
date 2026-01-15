@@ -69,6 +69,7 @@ import elseReturns from "./rules/elseReturns.ts";
 import emptyBlocks from "./rules/emptyBlocks.ts";
 import emptyDestructures from "./rules/emptyDestructures.ts";
 import emptyEnums from "./rules/emptyEnums.ts";
+import emptyExports from "./rules/emptyExports.ts";
 import emptyFiles from "./rules/emptyFiles.ts";
 import emptyFunctions from "./rules/emptyFunctions.ts";
 import emptyModuleAttributes from "./rules/emptyModuleAttributes.ts";
@@ -212,6 +213,7 @@ export const ts = createPlugin({
 		emptyBlocks,
 		emptyDestructures,
 		emptyEnums,
+		emptyExports,
 		emptyFiles,
 		emptyFunctions,
 		emptyModuleAttributes,
