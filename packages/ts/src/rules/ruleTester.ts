@@ -1,7 +1,6 @@
 import { RuleTester } from "@flint.fyi/rule-tester";
+import { createRuleTesterTSConfig } from "@flint.fyi/typescript-language";
 import { describe, it } from "vitest";
-
-import { createRuleTesterTSConfig } from "../utils/createRuleTesterTSConfig.ts";
 
 export const ruleTester = new RuleTester({
 	defaultFiles: createRuleTesterTSConfig({

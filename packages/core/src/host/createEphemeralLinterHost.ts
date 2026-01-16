@@ -11,14 +11,16 @@ export function createEphemeralLinterHost(baseHost: LinterHost): LinterHost {
 		...baseHost,
 		watchDirectory() {
 			return {
-				// eslint-disable-next-line @typescript-eslint/no-empty-function
-				[Symbol.dispose]() {},
+				[Symbol.dispose]() {
+					// Intentionally empty to satisfy the Disposable interface.
+				},
 			};
 		},
 		watchFile() {
 			return {
-				// eslint-disable-next-line @typescript-eslint/no-empty-function
-				[Symbol.dispose]() {},
+				[Symbol.dispose]() {
+					// Intentionally empty to satisfy the Disposable interface.
+				},
 			};
 		},
 	};
