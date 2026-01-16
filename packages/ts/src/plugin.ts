@@ -69,13 +69,26 @@ import elseReturns from "./rules/elseReturns.ts";
 import emptyBlocks from "./rules/emptyBlocks.ts";
 import emptyDestructures from "./rules/emptyDestructures.ts";
 import emptyEnums from "./rules/emptyEnums.ts";
+import emptyExports from "./rules/emptyExports.ts";
 import emptyFiles from "./rules/emptyFiles.ts";
 import emptyFunctions from "./rules/emptyFunctions.ts";
+import emptyModuleAttributes from "./rules/emptyModuleAttributes.ts";
+import emptyObjectTypes from "./rules/emptyObjectTypes.ts";
 import emptyStaticBlocks from "./rules/emptyStaticBlocks.ts";
+import emptyTypeParameterLists from "./rules/emptyTypeParameterLists.ts";
 import enumInitializers from "./rules/enumInitializers.ts";
+import enumMemberLiterals from "./rules/enumMemberLiterals.ts";
+import enumValueConsistency from "./rules/enumValueConsistency.ts";
+import enumValueDuplicates from "./rules/enumValueDuplicates.ts";
 import equalityOperatorNegations from "./rules/equalityOperatorNegations.ts";
+import errorMessages from "./rules/errorMessages.ts";
+import errorSubclassProperties from "./rules/errorSubclassProperties.ts";
+import errorUnnecessaryCaptureStackTraces from "./rules/errorUnnecessaryCaptureStackTraces.ts";
+import evals from "./rules/evals.ts";
 import evolvingVariableTypes from "./rules/evolvingVariableTypes.ts";
 import exceptionAssignments from "./rules/exceptionAssignments.ts";
+import exportMutables from "./rules/exportMutables.ts";
+import exportUniqueNames from "./rules/exportUniqueNames.ts";
 import fetchMethodBodies from "./rules/fetchMethodBodies.ts";
 import finallyStatementSafety from "./rules/finallyStatementSafety.ts";
 import forDirections from "./rules/forDirections.ts";
@@ -92,8 +105,13 @@ import globalAssignments from "./rules/globalAssignments.ts";
 import globalObjectCalls from "./rules/globalObjectCalls.ts";
 import impliedEvals from "./rules/impliedEvals.ts";
 import importEmptyBlocks from "./rules/importEmptyBlocks.ts";
+import importTypeSideEffects from "./rules/importTypeSideEffects.ts";
 import instanceOfArrays from "./rules/instanceOfArrays.ts";
 import isNaNComparisons from "./rules/isNaNComparisons.ts";
+import mathMethods from "./rules/mathMethods.ts";
+import meaninglessVoidOperators from "./rules/meaninglessVoidOperators.ts";
+import misleadingVoidExpressions from "./rules/misleadingVoidExpressions.ts";
+import moduleSpecifierLists from "./rules/moduleSpecifierLists.ts";
 import multilineAmbiguities from "./rules/multilineAmbiguities.ts";
 import namespaceDeclarations from "./rules/namespaceDeclarations.ts";
 import negativeZeroComparisons from "./rules/negativeZeroComparisons.ts";
@@ -202,13 +220,26 @@ export const ts = createPlugin({
 		emptyBlocks,
 		emptyDestructures,
 		emptyEnums,
+		emptyExports,
 		emptyFiles,
 		emptyFunctions,
+		emptyModuleAttributes,
+		emptyObjectTypes,
 		emptyStaticBlocks,
+		emptyTypeParameterLists,
 		enumInitializers,
+		enumMemberLiterals,
+		enumValueConsistency,
+		enumValueDuplicates,
 		equalityOperatorNegations,
+		errorMessages,
+		errorSubclassProperties,
+		errorUnnecessaryCaptureStackTraces,
+		evals,
 		evolvingVariableTypes,
 		exceptionAssignments,
+		exportMutables,
+		exportUniqueNames,
 		fetchMethodBodies,
 		finallyStatementSafety,
 		forDirections,
@@ -225,8 +256,13 @@ export const ts = createPlugin({
 		globalObjectCalls,
 		impliedEvals,
 		importEmptyBlocks,
+		importTypeSideEffects,
 		instanceOfArrays,
 		isNaNComparisons,
+		mathMethods,
+		meaninglessVoidOperators,
+		misleadingVoidExpressions,
+		moduleSpecifierLists,
 		multilineAmbiguities,
 		namespaceDeclarations,
 		negativeZeroComparisons,
