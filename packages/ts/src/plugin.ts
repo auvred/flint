@@ -90,6 +90,7 @@ import evolvingVariableTypes from "./rules/evolvingVariableTypes.ts";
 import exceptionAssignments from "./rules/exceptionAssignments.ts";
 import explicitAnys from "./rules/explicitAnys.ts";
 import exponentiationOperators from "./rules/exponentiationOperators.ts";
+import exportFromImports from "./rules/exportFromImports.ts";
 import exportMutables from "./rules/exportMutables.ts";
 import exportUniqueNames from "./rules/exportUniqueNames.ts";
 import extraneousClasses from "./rules/extraneousClasses.ts";
@@ -250,6 +251,7 @@ export const ts = createPlugin({
 		exceptionAssignments,
 		explicitAnys,
 		exponentiationOperators,
+		exportFromImports,
 		exportMutables,
 		exportUniqueNames,
 		extraneousClasses,
