@@ -116,6 +116,7 @@ import globalThisAliases from "./rules/globalThisAliases.ts";
 import impliedEvals from "./rules/impliedEvals.ts";
 import importEmptyBlocks from "./rules/importEmptyBlocks.ts";
 import importTypeSideEffects from "./rules/importTypeSideEffects.ts";
+import indexedObjectTypes from "./rules/indexedObjectTypes.ts";
 import instanceOfArrays from "./rules/instanceOfArrays.ts";
 import isNaNComparisons from "./rules/isNaNComparisons.ts";
 import literalConstructorWrappers from "./rules/literalConstructorWrappers.ts";
@@ -279,6 +280,7 @@ export const ts = createPlugin({
 		impliedEvals,
 		importEmptyBlocks,
 		importTypeSideEffects,
+		indexedObjectTypes,
 		instanceOfArrays,
 		isNaNComparisons,
 		literalConstructorWrappers,
