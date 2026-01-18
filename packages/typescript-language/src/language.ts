@@ -8,11 +8,12 @@ import { createTypeScriptFileFromProgram } from "./createTypeScriptFileFromProgr
 import { createTypeScriptServerHost } from "./createTypeScriptServerHost.ts";
 import { parseDirectivesFromTypeScriptFile } from "./directives/parseDirectivesFromTypeScriptFile.ts";
 import type { TypeScriptNodesByName } from "./nodes.ts";
+import type * as AST from "./types/ast.ts";
 import type { Checker } from "./types/checker.ts";
 
 export interface TypeScriptFileServices {
 	program: ts.Program;
-	sourceFile: ts.SourceFile;
+	sourceFile: AST.SourceFile;
 	typeChecker: Checker;
 }
 
@@ -63,12 +64,16 @@ export const typescriptLanguage = createLanguage<
 			);
 
 			return {
-				...parseDirectivesFromTypeScriptFile(sourceFile),
+				...parseDirectivesFromTypeScriptFile(sourceFile as AST.SourceFile),
 				file: {
 					[Symbol.dispose]() {
 						service.closeClientFile(data.filePathAbsolute);
 					},
-					...createTypeScriptFileFromProgram(data, program, sourceFile),
+					...createTypeScriptFileFromProgram(
+						data,
+						program,
+						sourceFile as AST.SourceFile,
+					),
 				},
 			};
 		}
