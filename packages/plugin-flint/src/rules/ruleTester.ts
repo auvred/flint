@@ -6,5 +6,6 @@ export const ruleTester = new RuleTester({
 	defaultFiles: createRuleTesterTSConfig(),
 	defaults: { fileName: "file.test.ts" },
 	describe,
+	diskBackedFSRoot: import.meta.dirname,
 	it,
 });
