@@ -3,8 +3,7 @@ import { createRuleTesterTSConfig } from "@flint.fyi/typescript-language";
 import { describe, it } from "vitest";
 
 export const ruleTester = new RuleTester({
-	defaultFiles: createRuleTesterTSConfig(),
-	defaults: { fileName: "file.tsx" },
+	defaults: { fileName: "file.tsx", files: createRuleTesterTSConfig() },
 	describe,
 	it,
 });

@@ -2,21 +2,22 @@ import type { LinterHost } from "@flint.fyi/core";
 import { assert, FlintAssertionError } from "@flint.fyi/utils";
 import fs from "node:fs";
 import path from "node:path";
+import timers from "node:timers";
 import ts from "typescript";
 
-function notImplemented(methodName: string): never {
+function serverHostMethodNotImplemented(methodName: string): never {
 	throw new FlintAssertionError(
 		`ts.ServerHost's method '${methodName}' is not implemented.`,
 	);
 }
 
-// https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/deps/uv/include/uv.h#L1260-L1269
+// Internal API: https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/deps/uv/include/uv.h#L1260-L1269
 const UV_DIRENT_TYPE = {
 	UV_DIRENT_DIR: 2,
 	UV_DIRENT_FILE: 1,
 };
 
-// https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/lib/internal/fs/utils.js#L160
+// Internal API: https://github.com/nodejs/node/blob/7b7f693a98da060e19f2ec12fb99997d5d5524f9/lib/internal/fs/utils.js#L160
 const DirentCtor = fs.Dirent as new (
 	name: string,
 	type: number,
@@ -29,10 +30,10 @@ export function createTypeScriptServerHost(
 	return {
 		...ts.sys,
 		args: [],
-		clearImmediate,
-		clearTimeout,
+		clearImmediate: timers.clearImmediate,
+		clearTimeout: timers.clearTimeout,
 		createDirectory() {
-			notImplemented("createDirectory");
+			serverHostMethodNotImplemented("createDirectory");
 		},
 		directoryExists(directoryPath) {
 			return (
@@ -41,7 +42,7 @@ export function createTypeScriptServerHost(
 			);
 		},
 		exit() {
-			notImplemented("exit");
+			serverHostMethodNotImplemented("exit");
 		},
 		fileExists(filePath) {
 			return (
@@ -100,8 +101,8 @@ export function createTypeScriptServerHost(
 		readFile(filePath) {
 			return host.readFile(path.resolve(host.getCurrentDirectory(), filePath));
 		},
-		setImmediate,
-		setTimeout,
+		setImmediate: timers.setImmediate,
+		setTimeout: timers.setTimeout,
 		watchDirectory(directoryPath, callback, recursive = false) {
 			const watcher = host.watchDirectory(
 				path.resolve(host.getCurrentDirectory(), directoryPath),
@@ -142,10 +143,10 @@ export function createTypeScriptServerHost(
 			};
 		},
 		write() {
-			notImplemented("write");
+			serverHostMethodNotImplemented("write");
 		},
 		writeFile() {
-			notImplemented("writeFile");
+			serverHostMethodNotImplemented("writeFile");
 		},
 	};
 }

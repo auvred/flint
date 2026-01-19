@@ -21,11 +21,12 @@ import { resolveReportedSuggestions } from "./resolveReportedSuggestions.ts";
 import { runTestCaseRule } from "./runTestCaseRule.ts";
 import type { InvalidTestCase, TestCase, ValidTestCase } from "./types.ts";
 
+export interface RuleTesterDefaults {
+	fileName?: string;
+	files?: Record<string, string>;
+}
 export interface RuleTesterOptions {
-	defaultFiles?: Record<string, string>;
-	defaults?: {
-		fileName?: string;
-	};
+	defaults?: RuleTesterDefaults;
 	describe?: TesterSetupDescribe;
 	diskBackedFSRoot?: string;
 	it?: TesterSetupIt;
@@ -52,13 +53,10 @@ export type TesterSetupIt = (
 export class RuleTester {
 	#fileFactories: CachedFactory<AnyLanguage, AnyLanguageFileFactory>;
 	#linterHost: VFSLinterHost;
-	#testerOptions: Required<
-		Omit<RuleTesterOptions, "defaultFiles" | "diskBackedFSRoot">
-	>;
+	#testerOptions: Required<Omit<RuleTesterOptions, "diskBackedFSRoot">>;
 
 	constructor({
-		defaultFiles,
-		defaults,
+		defaults = {},
 		describe,
 		diskBackedFSRoot,
 		it,
@@ -78,7 +76,8 @@ export class RuleTester {
 						),
 					)
 				: undefined;
-		if (defaultFiles != null && Object.keys(defaultFiles).length > 0) {
+		const { files: defaultFiles = {} } = defaults;
+		if (Object.keys(defaultFiles).length > 0) {
 			const vfs = createVFSLinterHost(
 				baseHost == null ? { cwd: process.cwd() } : { baseHost },
 			);
@@ -113,7 +112,7 @@ export class RuleTester {
 		}
 
 		this.#testerOptions = {
-			defaults: defaults ?? {},
+			defaults,
 			describe: defaultTo(describe, scope, "describe"),
 			it,
 			only,

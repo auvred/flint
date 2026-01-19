@@ -3,10 +3,12 @@ import { createRuleTesterTSConfig } from "@flint.fyi/typescript-language";
 import { describe, it } from "vitest";
 
 export const ruleTester = new RuleTester({
-	defaultFiles: createRuleTesterTSConfig({
-		lib: ["esnext", "DOM"],
-	}),
-	defaults: { fileName: "file.ts" },
+	defaults: {
+		fileName: "file.ts",
+		files: createRuleTesterTSConfig({
+			lib: ["esnext", "DOM"],
+		}),
+	},
 	describe,
 	diskBackedFSRoot: import.meta.dirname,
 	it,
